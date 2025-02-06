@@ -1,5 +1,4 @@
-# Contributors
-
+Contributors
 ---
 
 - Dan Lu (ludan0966@gmail.com)
