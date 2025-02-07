@@ -102,6 +102,84 @@ public class MainActivity extends AppCompatActivity {
         imageView.setImageBitmap(bitmap);
     }
 
+    private void gameCheck() {
+        if (checkWinner(currentPlayer)) {
+            showWinner();
+        } else {
+            if (isGameBoardFull()) {
+                showDraw();
+            } else {
+                currentPlayer = currentPlayer == 'X' ? 'O' : 'X';
+                if (currentPlayer == 'X') {
+                    tvGameInfo.setText(R.string.x_turn);
+                } else {
+                    tvGameInfo.setText(R.string.o_turn);
+                }
+            }
+        }
+    }
+
+    private boolean isGameBoardFull() {
+        for (char cell : gameBoard) {
+            if (cell == '?') return false;
+        }
+        return true;
+    }
+
+    private boolean checkWinner(char player) {
+        // Rows
+        for (int i = 0; i < 3; i++) {
+            if (gameBoard[i * 3] == player && gameBoard[i * 3 + 1] == player && gameBoard[i * 3 + 2] == player) return true;
+        }
+
+        // Cols
+        for (int i = 0; i < 3; i++) {
+            if (gameBoard[i] == player && gameBoard[i + 3] == player && gameBoard[i + 6] == player) return true;
+        }
+
+        // Corners
+        if (gameBoard[0] == player && gameBoard[4] == player && gameBoard[8] == player) return true;
+        if (gameBoard[2] == player && gameBoard[4] == player && gameBoard[6] == player) return true;
+
+        // Not match found
+        return false;
+    }
+
+    private void showWinner() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.game_over);
+
+        if (currentPlayer == 'X') builder.setMessage(R.string.x_wins);
+        else builder.setMessage(R.string.o_wins);
+
+        builder.setPositiveButton(R.string.play_again, (dialog, which) -> {
+            if (currentPlayer == 'X') xScore++;
+            else oScore++;
+            updateTvScore();
+            initGame();
+        });
+        builder.setCancelable(false);
+
+        builder.show();
+    }
+
+    private void showDraw() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.game_over);
+
+        builder.setMessage(R.string.draw);
+
+        builder.setPositiveButton(R.string.play_again, (dialog, which) -> initGame());
+        builder.setCancelable(false);
+
+        builder.show();
+    }
+
+    private void updateTvScore() {
+        tvXScore.setText(String.valueOf(xScore));
+        tvOScore.setText(String.valueOf(oScore));
+    }
+
     public void OnResetMatchButtonClicked(android.view.View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.reset_match);
