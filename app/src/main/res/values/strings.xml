@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Tic-Tac-Toe</string>
+    <string name="x_turn">X\'s Turn</string>
+    <string name="o_turn">O\'s Turn</string>
+    <string name="cell_already_taken">Cell Already Taken</string>
+    <string name="play_again">Play Again</string>
+    <string name="game_over">Game Over</string>
+    <string name="draw">Oh! It\'s a draw!</string>
+    <string name="x_wins">X wins!</string>
+    <string name="o_wins">O wins!</string>
+    <string name="btn_reset_score_board">Reset Scores</string>
+    <string name="reset_score_board">Reset Score Board</string>
+    <string name="reset_score_board_question">Are you sure to reset the scores?</string>
+    <string name="reset_score_board_successfully">Reset Score Board Successfully</string>
+    <string name="question_yes">Yes</string>
+    <string name="question_no">No</string>
+    <string name="btn_reset_match">Reset Match</string>
+    <string name="reset_match">Reset Match</string>
+    <string name="reset_match_question">Are you sure to reset this match?</string>
+    <string name="reset_match_successfully">Reset Match Successfully</string>
+    <string name="score_board_dash">-</string>
 </resources>
