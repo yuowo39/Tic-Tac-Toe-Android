@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private char currentPlayer;
 
     private TextView tvGameInfo;
+    private TextView tvXScore;
+    private TextView tvOScore;
+    private int xScore = 0;
+    private int oScore = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         tvGameInfo = findViewById(R.id.tv_game_info);
+        tvXScore = findViewById(R.id.tv_x_score);
+        tvOScore = findViewById(R.id.tv_o_score);
 
+        updateTvScore();
         initGame();
     }
 
@@ -70,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         if (gameBoard[index] == '?') {
             gameBoard[index] = currentPlayer;
             drawCell((ImageView)view);
+
+            gameCheck();
         } else {
             Toast.makeText(this, R.string.cell_already_taken, Toast.LENGTH_SHORT).show();
         }
@@ -178,6 +187,26 @@ public class MainActivity extends AppCompatActivity {
     private void updateTvScore() {
         tvXScore.setText(String.valueOf(xScore));
         tvOScore.setText(String.valueOf(oScore));
+    }
+
+    public void OnResetScoreBoardButtonClicked(android.view.View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.reset_score_board);
+
+        builder.setMessage(R.string.reset_score_board_question);
+
+        builder.setPositiveButton(R.string.question_yes, (dialog, which) -> resetScoreBoard());
+        builder.setNegativeButton(R.string.question_no, (dialog, which) -> dialog.dismiss());
+        builder.setCancelable(false);
+
+        builder.show();
+    }
+
+    private void resetScoreBoard() {
+        xScore = 0;
+        oScore = 0;
+        updateTvScore();
+        Toast.makeText(this, R.string.reset_score_board_successfully, Toast.LENGTH_SHORT).show();
     }
 
     public void OnResetMatchButtonClicked(android.view.View view) {
