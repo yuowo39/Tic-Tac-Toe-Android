@@ -1,5 +1,7 @@
 package net.yuu.tictactoe.android;
 
+import android.app.AlertDialog;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -98,5 +100,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         imageView.setImageBitmap(bitmap);
+    }
+
+    public void OnResetMatchButtonClicked(android.view.View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.reset_match);
+
+        builder.setMessage(R.string.reset_match_question);
+
+        builder.setPositiveButton(R.string.question_yes, (dialog, which) -> resetMatch());
+        builder.setNegativeButton(R.string.question_no, (dialog, which) -> dialog.dismiss());
+        builder.setCancelable(false);
+
+        builder.show();
+    }
+
+    private void resetMatch() {
+        initGame();
+        Toast.makeText(this, R.string.reset_match_successfully, Toast.LENGTH_SHORT).show();
     }
 }
