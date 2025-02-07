@@ -1,5 +1,5 @@
 Tic-Tac-Toe Android
-======
+===
 
 ## Copyright & License
 
